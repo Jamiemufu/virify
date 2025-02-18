@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       openAPI: true
-    }
+    },
+    imports: {
+      dirs: ['server/database', 'server/database/schema'],
+    },
   },
 })

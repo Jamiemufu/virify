@@ -1,7 +1,5 @@
-import seedData from "../utils/seed";
-
 export default defineEventHandler(async (event) => {
-  await seedData();
+  await seedUsers();
   return {
     status: 200,
     body: {

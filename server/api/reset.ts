@@ -1,6 +1,3 @@
-
-import deleteUsers from '../utils/deleteUsers';
-
 export default defineEventHandler(async (event) => {
   await deleteUsers();
   return {
