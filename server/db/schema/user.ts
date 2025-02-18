@@ -7,5 +7,3 @@ export const users = pgTable('users', {
   id: integer(),
   name: text(),
 });
-
-export default users;
