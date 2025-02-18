@@ -7,3 +7,5 @@ export const listings = pgTable('listings', {
   id: integer(),
   name: text(),
 });
+
+export default listings;

@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@scalar/nuxt": "0.2.196",
-    "db0": "^0.2.4",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.3",
     "drizzle-seed": "^0.3.1",

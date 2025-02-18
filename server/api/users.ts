@@ -1,5 +1,8 @@
 export default defineEventHandler(async (event) => {
-  const user = await db.select().from(users).all();
+  // selcect all users via query bulder
+  // const user = await db.query.users.findMany();
+  // const user = await db.query(usersSchema).findMany();
+  const user = await db.query.users.findMany();
 
   return {
     message: 'number of users: ' + user.length,
