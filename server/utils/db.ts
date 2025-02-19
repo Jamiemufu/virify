@@ -1,5 +1,5 @@
 import { drizzle } from "drizzle-orm/node-postgres";
-// import our scheams
+
 // TODO ADD EACH NEW SCHEMA HERE INCLUDING RELATIONSIPS
 export const schemas = {
   users,
@@ -9,8 +9,11 @@ export const schemas = {
   userPropertyRelation,
   propertyUserRelation,
   propertyDetailsRelation,
-  propertyPropertyDetailsRelation
-};
+  propertyPropertyDetailsRelation,
+  propertyFeatures,
+  propertyFeaturesPropertiesRelation,
+  propertyFeatureRelation,
+}
 
 // seed wrapper specifically for seeding - as dbo integration does not support seeding
 export const db = drizzle({

@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
       properties: {
         with: {
           propertyDetails: true,
+          propertyFeatures: true,
         }
       }
     }

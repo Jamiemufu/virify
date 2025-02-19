@@ -1,6 +1,5 @@
 // TODO: Maybe I need to split these tasks into separate files for seperate tables given the references
 import { seed } from "drizzle-seed";
-import { propertyDetails } from '../database/schema/property-details';
 
 
 // http://localhost:3000/_nitro/tasks/seed-table-task?table=table
@@ -17,7 +16,7 @@ export default defineTask({
    */
   async run() {
     // seed the table
-    await seed(db, {users, properties, propertyDetails}).refine((f) => ({
+    await seed(db, {users, properties, propertyDetails, propertyFeatures}).refine((f) => ({
       users: {
         count: 10,
         with: {
@@ -25,10 +24,12 @@ export default defineTask({
         },
       },
       properties: {
+        count: 1,
         with: {
           propertyDetails: 1,
+          propertyFeatures: 1,
         },
-      },
+      }
     }));
     // return the result
     return {
