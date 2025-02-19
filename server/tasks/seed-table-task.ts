@@ -1,5 +1,4 @@
 import { seed } from "drizzle-seed";
-import stringToSchema from "../utils/string-to-schema";
 
 // http://localhost:3000/_nitro/tasks/seed-table-task?table=table
 export default defineTask({
@@ -10,6 +9,8 @@ export default defineTask({
   /**
    * Task Runner
    * @param param0 table: string
+   * @param param1 count: number
+   * @import db
    */
   async run({ payload }) {
     const { table, count } = payload;
