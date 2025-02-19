@@ -3,9 +3,9 @@ import { pgTable, integer, text } from "drizzle-orm/pg-core"
 /**
  * This is a table definition for the `listings` table.
  */
-export const listings = pgTable('listings', {
+export const listing = pgTable('listings', {
   id: integer(),
   name: text(),
 });
 
-export default listings;
+export default listing;
