@@ -24,14 +24,14 @@ export const users = pgTable('users', {
   uniqueIndex('emailUniqueIndex').on(lowerEmail(table.email)),
 ]);
 
-export const userPropertyRelation = relations(users, ({ one }) => ({
-	properties: one(properties),
+export const userPropertyRelation = relations(users, ({ many }) => ({
+	properties: many(properties),
 }));
 
 /**
  * get the email in lowercase
  * access: .where(eq(lower(users.email), email.toLowerCase()));
- * @param email lowercase email
+ * @param email lowercase email 
  * @returns email in lowercase
  */
 export const lowerEmail = function lower(email: AnyPgColumn): SQL {

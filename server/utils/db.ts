@@ -1,6 +1,6 @@
 import { drizzle } from "drizzle-orm/node-postgres";
-
 // import our scheams
+// TODO ADD EACH NEW SCHEMA HERE INCLUDING RELATIONSIPS
 export const schemas = {
   users,
   properties,
