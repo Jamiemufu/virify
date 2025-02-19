@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       tasks: true,
     },
     imports: {
-      dirs: ['server/database/schema'],
+      dirs: ['server/database/schema/*.ts'],
     },
   },
 })
