@@ -16,6 +16,7 @@ export default defineTask({
    */
   async run() {
     // seed the table
+    // TODO: Add each table needed to be seeded here
     await seed(db, {users, properties, propertyDetails, propertyFeatures}).refine((f) => ({
       users: {
         count: 10,
