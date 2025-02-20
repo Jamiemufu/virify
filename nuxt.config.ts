@@ -9,12 +9,14 @@ export default defineNuxtConfig({
       tasks: true,
     },
     imports: {
-      dirs: ['server/database/schema/*.ts', 'server/lib/*.ts'],
+      dirs: ['server/database/lib/*.ts'],
     },
   },
   prisma: {
-    prismaRoot: './server',
-    prismaSchemaPath: './server/prisma/schema.prisma',
+    prismaRoot: './server/database',
+    prismaSchemaPath: './server/database/prisma/schema.prisma',
     skipPrompts: true,
+    generateClient: false,
+    installStudio: false,
   }
 })

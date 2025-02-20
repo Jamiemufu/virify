@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
       include: {
         agent: true,
         listings: true,
+        user: true,
       },
     });
     return {

@@ -1,0 +1,7 @@
+model Image {
+  id         String   @id @default(uuid())
+  url        String
+  meta      String
+  property   Property @relation(fields: [propertyId], references: [id])
+  propertyId String
+}

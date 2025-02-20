@@ -1,4 +1,3 @@
-import { fakeUser, fakeProperty } from '../prisma/fake-data';
 import { faker } from '@faker-js/faker';
 
 
@@ -49,7 +48,6 @@ export default defineEventHandler(async (event) => {
           data: {
             name: faker.person.fullName(),
             contact: faker.phone.number(),
-            email: faker.internet.email(),
             whatsapp: faker.phone.number(),
           },
         })

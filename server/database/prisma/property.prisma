@@ -1,0 +1,118 @@
+model Property {
+  id                 String   @id @default(uuid())
+  title              String
+  price              Float
+  priceType          PriceType[]
+  propertyType       PropertyType[]
+  location           String
+  listingType        ListingType[]
+  availabilityStatus AvailabilityStatus[]
+  bedrooms          Int
+  bathrooms         Int
+  totalSize         Float
+  yearBuilt         Int
+  constructionType  String?
+  roofType          String?
+  floorLevel        Int?
+  furnishingStatus  FurnishingStatus[]
+  energyRating      String
+  tenure            Tenure[]
+  leaseTerm         Int? // If leasehold
+  kitchenFeatures   String[]
+  livingFeatures    String[]
+  bathroomFeatures  String[]
+  storageOptions    String[]
+  outdoorSpaces     OutdoorSpace[]
+  parkingOptions    ParkingOption[]
+  securityFeatures  String[]
+  amenities         Amenity[]
+  councilTaxBand    String?
+  serviceCharges    Float?
+  groundRent        Float?
+  mortgageEstimate  Float?
+  deposit           Float?
+  upfrontCosts      Float?
+  images            Image[]
+  videoTour         String?
+  floorPlan         String?
+  agent             Agent   @relation(fields: [agentId], references: [id])
+  agentId           String
+  investmentPotential String
+  petPolicy         PetPolicy[]
+  accessibilityFeatures String[]
+  moveInDate        DateTime
+  listings          Listing[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user User[]
+}
+
+enum PriceType {
+ OFFERS_IN_EXCESS_OF
+ GUIDE_PRICE
+ OFFERS_IN_THE_REGION_OF
+ PER_CALENDAR_MONTH
+ PER_WEEK
+}
+
+enum PropertyType {
+ HOUSE
+ APARTMENT
+ CONDO
+ COMMERCIAL
+ LAND
+}
+
+
+enum ListingType {
+ FOR_SALE
+ FOR_RENT
+ SHORT_TERM_LET
+ AUCTION
+}
+
+enum AvailabilityStatus {
+ AVAILABLE
+ UNDER_OFFER
+ SOLD
+ LET_AGREED
+}
+
+enum FurnishingStatus {
+ FURNISHED
+ UNFURNISHED
+ PART_FURNISHED
+}
+
+enum Tenure {
+ LEASEHOLD
+ FREEHOLD
+}
+
+enum OutdoorSpace {
+ GARDEN
+ TERRACE
+ BALCONY
+ PATIO
+ LAND // >1 acre
+}
+
+enum ParkingOption {
+ GARAGE
+ DRIVEWAY
+ PERMIT_PARKING
+ ON_STREET_PARKING 
+}
+
+enum Amenity {
+ TRANSPORT_LINKS 
+ SCHOOLS_UNIVERSITIES 
+ HOSPITALS_MEDICAL 
+ SHOPPING_ENTERTAINMENT 
+ GREEN_SPACES 
+}
+
+enum PetPolicy {
+ ALLOWED 
+ NOT_ALLOWED 
+}

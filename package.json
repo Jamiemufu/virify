@@ -8,8 +8,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "migrate-run": "prisma migrate dev --schema ./server/prisma",
-    "prisma-generate": "prisma generate --schema ./server/prisma"
+    "migrate-run": "prisma migrate dev --schema ./server/database/prisma",
+    "prisma-generate": "prisma generate --schema ./server/database/prisma",
+    "prisma-studio": "prisma studio --schema ./server/database/prisma"
   },
   "dependencies": {
     "@prisma/client": "6.4.0",

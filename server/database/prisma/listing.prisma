@@ -1,0 +1,26 @@
+model Listing {
+  id                 String   @id @default(uuid())
+  property           Property @relation(fields: [propertyId], references: [id])
+  propertyId         String
+  listingType        ListingType[]
+  price              Float
+  availabilityStatus AvailabilityStatus[]
+  agent              Agent    @relation(fields: [agentId], references: [id])
+  agentId            String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  description        String
+  features           Feature[]
+  user User[]
+}
+
+enum Feature {
+ KITCHEN_FEATURES 
+ LIVING_AREA_FEATURES 
+ BATHROOM_FEATURES 
+ STORAGE_SPACE 
+ OUTDOOR_SPACE 
+ PARKING 
+ SECURITY_FEATURES 
+ AMENITIES_NEARBY 
+}

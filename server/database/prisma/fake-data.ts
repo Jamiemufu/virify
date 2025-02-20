@@ -1,58 +1,9 @@
-import { VerificationStatus, Role, PriceType, PropertyType, ListingType, AvailabilityStatus, FurnishingStatus, Tenure, OutdoorSpace, ParkingOption, Amenity, PetPolicy, Feature } from '@prisma/client';
+import { Feature, PriceType, PropertyType, ListingType, AvailabilityStatus, FurnishingStatus, Tenure, OutdoorSpace, ParkingOption, Amenity, PetPolicy, VerificationStatus, Role } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import Decimal from 'decimal.js';
 
 
 
-export function fakeUser() {
-  return {
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    password: faker.lorem.words(5),
-    dob: undefined,
-    contact: undefined,
-    updatedAt: faker.date.anytime(),
-    addressId: undefined,
-  };
-}
-export function fakeUserComplete() {
-  return {
-    id: faker.string.uuid(),
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    password: faker.lorem.words(5),
-    role: Role.USER,
-    verificationStatus: VerificationStatus.NILL,
-    dob: undefined,
-    contact: undefined,
-    createdAt: new Date(),
-    updatedAt: faker.date.anytime(),
-    agentId: undefined,
-    addressId: undefined,
-  };
-}
-export function fakePaymentInfo() {
-  return {
-    cardNumber: faker.lorem.words(5),
-    cardHolderName: faker.lorem.words(5),
-    expiryDate: faker.date.anytime(),
-    cvv: faker.number.int(),
-    updatedAt: faker.date.anytime(),
-  };
-}
-export function fakePaymentInfoComplete() {
-  return {
-    id: faker.string.uuid(),
-    userId: faker.string.uuid(),
-    cardNumber: faker.lorem.words(5),
-    cardHolderName: faker.lorem.words(5),
-    expiryDate: faker.date.anytime(),
-    cvv: faker.number.int(),
-    billingAddressId: faker.string.uuid(),
-    createdAt: new Date(),
-    updatedAt: faker.date.anytime(),
-  };
-}
 export function fakeAddress() {
   return {
     addressLine1: faker.lorem.words(5),
@@ -76,6 +27,83 @@ export function fakeAddressComplete() {
     createdAt: new Date(),
     updatedAt: faker.date.anytime(),
     userId: undefined,
+  };
+}
+export function fakeAgent() {
+  return {
+    name: faker.person.fullName(),
+    contact: faker.lorem.words(5),
+    whatsapp: undefined,
+    liveChat: undefined,
+  };
+}
+export function fakeAgentComplete() {
+  return {
+    id: faker.string.uuid(),
+    name: faker.person.fullName(),
+    contact: faker.lorem.words(5),
+    whatsapp: undefined,
+    liveChat: undefined,
+  };
+}
+export function fakeImage() {
+  return {
+    url: faker.lorem.words(5),
+    meta: faker.lorem.words(5),
+  };
+}
+export function fakeImageComplete() {
+  return {
+    id: faker.string.uuid(),
+    url: faker.lorem.words(5),
+    meta: faker.lorem.words(5),
+    propertyId: faker.string.uuid(),
+  };
+}
+export function fakeListing() {
+  return {
+    listingType: faker.helpers.arrayElement([ListingType.FOR_SALE, ListingType.FOR_RENT, ListingType.SHORT_TERM_LET, ListingType.AUCTION] as const),
+    price: faker.number.float(),
+    availabilityStatus: faker.helpers.arrayElement([AvailabilityStatus.AVAILABLE, AvailabilityStatus.UNDER_OFFER, AvailabilityStatus.SOLD, AvailabilityStatus.LET_AGREED] as const),
+    updatedAt: faker.date.anytime(),
+    description: faker.lorem.words(5),
+    features: faker.helpers.arrayElement([Feature.KITCHEN_FEATURES, Feature.LIVING_AREA_FEATURES, Feature.BATHROOM_FEATURES, Feature.STORAGE_SPACE, Feature.OUTDOOR_SPACE, Feature.PARKING, Feature.SECURITY_FEATURES, Feature.AMENITIES_NEARBY] as const),
+  };
+}
+export function fakeListingComplete() {
+  return {
+    id: faker.string.uuid(),
+    propertyId: faker.string.uuid(),
+    listingType: faker.helpers.arrayElement([ListingType.FOR_SALE, ListingType.FOR_RENT, ListingType.SHORT_TERM_LET, ListingType.AUCTION] as const),
+    price: faker.number.float(),
+    availabilityStatus: faker.helpers.arrayElement([AvailabilityStatus.AVAILABLE, AvailabilityStatus.UNDER_OFFER, AvailabilityStatus.SOLD, AvailabilityStatus.LET_AGREED] as const),
+    agentId: faker.string.uuid(),
+    createdAt: new Date(),
+    updatedAt: faker.date.anytime(),
+    description: faker.lorem.words(5),
+    features: faker.helpers.arrayElement([Feature.KITCHEN_FEATURES, Feature.LIVING_AREA_FEATURES, Feature.BATHROOM_FEATURES, Feature.STORAGE_SPACE, Feature.OUTDOOR_SPACE, Feature.PARKING, Feature.SECURITY_FEATURES, Feature.AMENITIES_NEARBY] as const),
+  };
+}
+export function fakePaymentInfo() {
+  return {
+    cardNumber: faker.lorem.words(5),
+    cardHolderName: faker.lorem.words(5),
+    expiryDate: faker.date.anytime(),
+    cvv: faker.number.int(),
+    updatedAt: faker.date.anytime(),
+  };
+}
+export function fakePaymentInfoComplete() {
+  return {
+    id: faker.string.uuid(),
+    userId: faker.string.uuid(),
+    cardNumber: faker.lorem.words(5),
+    cardHolderName: faker.lorem.words(5),
+    expiryDate: faker.date.anytime(),
+    cvv: faker.number.int(),
+    billingAddressId: faker.string.uuid(),
+    createdAt: new Date(),
+    updatedAt: faker.date.anytime(),
   };
 }
 export function fakeProperty() {
@@ -167,58 +195,30 @@ export function fakePropertyComplete() {
     updatedAt: faker.date.anytime(),
   };
 }
-export function fakeListing() {
+export function fakeUser() {
   return {
-    listingType: faker.helpers.arrayElement([ListingType.FOR_SALE, ListingType.FOR_RENT, ListingType.SHORT_TERM_LET, ListingType.AUCTION] as const),
-    price: faker.number.float(),
-    availabilityStatus: faker.helpers.arrayElement([AvailabilityStatus.AVAILABLE, AvailabilityStatus.UNDER_OFFER, AvailabilityStatus.SOLD, AvailabilityStatus.LET_AGREED] as const),
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    password: faker.lorem.words(5),
+    dob: undefined,
+    contact: undefined,
     updatedAt: faker.date.anytime(),
-    description: faker.lorem.words(5),
-    features: faker.helpers.arrayElement([Feature.KITCHEN_FEATURES, Feature.LIVING_AREA_FEATURES, Feature.BATHROOM_FEATURES, Feature.STORAGE_SPACE, Feature.OUTDOOR_SPACE, Feature.PARKING, Feature.SECURITY_FEATURES, Feature.AMENITIES_NEARBY] as const),
+    addressId: undefined,
   };
 }
-export function fakeListingComplete() {
+export function fakeUserComplete() {
   return {
     id: faker.string.uuid(),
-    propertyId: faker.string.uuid(),
-    listingType: faker.helpers.arrayElement([ListingType.FOR_SALE, ListingType.FOR_RENT, ListingType.SHORT_TERM_LET, ListingType.AUCTION] as const),
-    price: faker.number.float(),
-    availabilityStatus: faker.helpers.arrayElement([AvailabilityStatus.AVAILABLE, AvailabilityStatus.UNDER_OFFER, AvailabilityStatus.SOLD, AvailabilityStatus.LET_AGREED] as const),
-    agentId: faker.string.uuid(),
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    password: faker.lorem.words(5),
+    role: Role.USER,
+    verificationStatus: VerificationStatus.NILL,
+    dob: undefined,
+    contact: undefined,
     createdAt: new Date(),
     updatedAt: faker.date.anytime(),
-    description: faker.lorem.words(5),
-    features: faker.helpers.arrayElement([Feature.KITCHEN_FEATURES, Feature.LIVING_AREA_FEATURES, Feature.BATHROOM_FEATURES, Feature.STORAGE_SPACE, Feature.OUTDOOR_SPACE, Feature.PARKING, Feature.SECURITY_FEATURES, Feature.AMENITIES_NEARBY] as const),
-  };
-}
-export function fakeImage() {
-  return {
-    url: faker.lorem.words(5),
-  };
-}
-export function fakeImageComplete() {
-  return {
-    id: faker.string.uuid(),
-    url: faker.lorem.words(5),
-    propertyId: faker.string.uuid(),
-  };
-}
-export function fakeAgent() {
-  return {
-    name: faker.person.fullName(),
-    contact: faker.lorem.words(5),
-    email: undefined,
-    whatsapp: undefined,
-    liveChat: undefined,
-  };
-}
-export function fakeAgentComplete() {
-  return {
-    id: faker.string.uuid(),
-    name: faker.person.fullName(),
-    contact: faker.lorem.words(5),
-    email: undefined,
-    whatsapp: undefined,
-    liveChat: undefined,
+    agentId: undefined,
+    addressId: undefined,
   };
 }

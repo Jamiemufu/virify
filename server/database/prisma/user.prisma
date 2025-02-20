@@ -1,0 +1,31 @@
+model User {
+  id                 String   @id @default(uuid())
+  name               String
+  email              String   @unique
+  password           String
+  role               Role     @default(USER)
+  verificationStatus VerificationStatus @default(NILL)
+  dob                DateTime?
+  contact            String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  agent              Agent?   @relation(fields: [agentId], references: [id])
+  agentId            String?
+  properties         Property[]
+  listings           Listing[]
+  paymentInfo        PaymentInfo[]
+  address            Address?
+  addressId          String? @unique
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  NILL
+}
+
+enum Role {
+  USER
+  AGENT
+  ADMIN
+}
