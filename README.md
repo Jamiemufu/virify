@@ -1,5 +1,15 @@
 # Virify API
 
+## System Dependencies
+
+*Node*
+[WSL Install](https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl#install-nvm-nodejs-and-npm)  
+[windows install](https://nodejs.org/en/download)
+[brew install](https://formulae.brew.sh/formula/node)
+
+*Postgresql*
+Guide below
+
 ## Nuxt Server
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
