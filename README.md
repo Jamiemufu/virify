@@ -117,10 +117,18 @@ Schemas are models that are used to map tables and columns. The schemas can be l
 
 ### Prisma Client
 
-Prisma as a ORM generates a client very specific to your schemas, before you make queries you need to generate a new client if there have been any changes to your model/schema.
+Prisma as a ORM generates a client very specific to your schemas, before you make queries you need to generate a new client and if there are changes to the model/schema.
+
+Example:
 
 ```bash
 pnpm prisma-generate
+```
+
+This will generate a client to be used then you can build the application and use it globally
+
+```bash
+pnpm run dev
 ```
 
 Once generated the client becomes available globally. This is auto-imported into your nuxt application so call it by `prisma`
