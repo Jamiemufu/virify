@@ -12,12 +12,15 @@
     "prisma-generate": "prisma generate --schema ./server/database/prisma",
     "prisma-studio": "prisma studio --schema ./server/database/prisma"
   },
+  "prisma": {
+    "schema": "./server/database/prisma/"
+  },
   "dependencies": {
     "@prisma/client": "6.4.0",
     "@prisma/nuxt": "^0.3.0",
     "@scalar/nuxt": "0.2.196",
     "dotenv": "^16.4.7",
-    "nuxt": "^3.6.0",
+    "nuxt": "^3.15.4",
     "pg": "^8.13.3",
     "vue": "latest",
     "vue-router": "^4.5.0"
@@ -28,7 +31,7 @@
     "@types/pg": "^8.11.11",
     "prisma": "^6.4.1",
     "prisma-generator-fake-data": "^0.14.3",
-    "tsx": "^4.19.2",
+    "tsx": "^4.19.3",
     "typescript": "^5.7.3",
     "vue-tsc": "^2.2.2"
   },
