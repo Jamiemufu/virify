@@ -33,7 +33,9 @@ jobs:
           output_location: ".output/public" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
         env:
-          PRE_BUILD_COMMAND: "npx prisma generate"
+          ###### Environment Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding environment configurations, please visit: https://github.com/microsoft/Oryx/blob/main/doc/configuration.md
+          POST_BUILD_COMMAND: "npx prisma generate"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
