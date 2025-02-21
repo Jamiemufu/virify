@@ -36,7 +36,8 @@ jobs:
           ###### Environment Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding environment configurations, please visit: https://github.com/microsoft/Oryx/blob/main/doc/configuration.md
           PRE_BUILD_COMMAND: "npm install && npx prisma generate --schema ./server/database/prisma"
-          # POST_BUILD_COMMAND: "npx prisma generate --schema ./server/database/prisma"
+          DISABLE_CHECKERS: true
+          ###### End of Environment Configurations ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

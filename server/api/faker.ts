@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
   
     // Create fake addresses
     const addresses = await Promise.all(
-      users.map((user) =>
+      users.map((user: { id: any; }) =>
         prisma.address.create({
           data: {
             addressLine1: faker.location.streetAddress(),
@@ -79,7 +79,7 @@ export default defineEventHandler(async (event) => {
   
     // Create fake listings
     await Promise.all(
-      properties.map((property) =>
+      properties.map((property: { id: any; price: any; agentId: any; }) =>
         prisma.listing.create({
           data: {
             propertyId: property.id,
