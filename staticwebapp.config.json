@@ -1,0 +1,26 @@
+{
+  "routes": [
+    {
+      "route": "/_swagger",
+      "rewrite": "/_swagger/index.html"
+    },
+    {
+      "route": "/_scalar",
+      "rewrite": "/_scalar/index.html"
+    },
+    {
+      "route": "/index.html",
+      "redirect": "/"
+    },
+    {
+      "route": "/",
+      "rewrite": "/api/server"
+    }
+  ],
+  "platform": {
+    "apiRuntime": "node:20"
+  },
+  "navigationFallback": {
+    "rewrite": "/api/server"
+  }
+}
