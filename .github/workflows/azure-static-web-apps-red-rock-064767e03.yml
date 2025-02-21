@@ -40,7 +40,7 @@ jobs:
           ##### Environment Configurations - These values can be configured to match your app requirements. ######
           ###### For more information regarding environment configurations, please visit: https://github.com/microsoft/Oryx/blob/main/doc/configuration.md
           ##### End of Environment Configurations ######
-          POST_BUILD_COMMAND: 'npx prisma generate && npx prisma migrate deploy'
+          POST_BUILD_COMMAND: 'EXPORT DATABASE_URL=${{ secrets.DATABASE_URL }} && npx prisma generate && npx prisma migrate deploy'
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
