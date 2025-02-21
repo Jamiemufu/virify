@@ -35,7 +35,7 @@ jobs:
         env:
           ###### Environment Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding environment configurations, please visit: https://github.com/microsoft/Oryx/blob/main/doc/configuration.md
-          POST_BUILD_COMMAND: "npx prisma generate"
+          POST_BUILD_COMMAND: "npx prisma generate --schema ./server/database/prisma"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
