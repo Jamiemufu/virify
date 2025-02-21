@@ -33,7 +33,7 @@ jobs:
           output_location: ".output/public" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
         env:
-          POST_BUILD_COMMAND: "npm prisma generate"
+          PRE_BUILD_COMMAND: "npx prisma generate"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
