@@ -38,8 +38,8 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           ##### Environment Configurations - These values can be configured to match your app requirements. ######
-          For more information regarding environment configurations, please visit: https://github.com/microsoft/Oryx/blob/main/doc/configuration.md
-          PRE_BUILD_COMMAND: "npx prisma migrate deploy"
+          ###### For more information regarding environment configurations, please visit: https://github.com/microsoft/Oryx/blob/main/doc/configuration.md
+          POST_BUILD_COMMAND: "npx prisma migrate deploy"
           DISABLE_CHECKERS: true
           ##### End of Environment Configurations ######
 
