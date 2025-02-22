@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
       },
     });
     return {
-      message: "number of [properties: ]" + propertyData.length,
+      properties: propertyData.length,
       data: propertyData,
     };
   } catch (error) {
