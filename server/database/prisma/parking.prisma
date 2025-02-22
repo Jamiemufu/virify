@@ -1,0 +1,12 @@
+model Parking {
+  id            Int      @id @default(autoincrement())
+  garage        Boolean
+  driveway      Boolean
+  permitParking Boolean
+  onStreet      Boolean
+  noParking     Boolean
+  propertyId    Int
+  property      Property @relation(fields: [propertyId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

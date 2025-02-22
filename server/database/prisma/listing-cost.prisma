@@ -1,0 +1,10 @@
+model ListingCosts {
+  id           Int      @id @default(autoincrement())
+  price        Float
+  deposit      Float
+  upfrontCosts Float
+  listing      Listing? @relation(fields: [listingId], references: [id])
+  listingId    Int      @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

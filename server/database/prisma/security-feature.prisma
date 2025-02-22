@@ -1,0 +1,11 @@
+model SecurityFeatures {
+  id                Int      @id @default(autoincrement())
+  gatedCommunity    Boolean
+  cctv              Boolean
+  alarmSystem       Boolean
+  neighborhoodWatch Boolean
+  propertyId        Int
+  property          Property @relation(fields: [propertyId], references: [id])
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}

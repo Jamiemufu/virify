@@ -1,0 +1,11 @@
+model AdditionalFeatures {
+  id                    Int      @id @default(autoincrement())
+  investmentPotential   String
+  petPolicy             String
+  accessibilityFeatures String
+  moveInDate            String
+  propertyId            Int
+  property              Property @relation(fields: [propertyId], references: [id])
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}

@@ -1,0 +1,10 @@
+model KitchenFeatures {
+  id                 Int      @id @default(autoincrement())
+  modern             Boolean
+  openPlan           Boolean
+  appliancesIncluded Boolean
+  propertyId         Int
+  property           Property @relation(fields: [propertyId], references: [id])
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}

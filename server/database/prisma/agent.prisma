@@ -1,10 +1,13 @@
 model Agent {
-  id         String   @id @default(uuid())
-  name       String
-  contact    String
-  whatsapp   String?
-  liveChat   String?
-  properties Property[]
-  listings  Listing[]
-  user User[]
+  id                   Int        @id @default(autoincrement())
+  name                 String
+  contactInfo          String
+  directContactOptions String
+  viewingAvailability  String
+  addressId            Int
+  address              Address?
+  property             Property[]
+  Listing              Listing[]
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
 }

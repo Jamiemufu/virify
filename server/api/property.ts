@@ -5,11 +5,10 @@ export default defineEventHandler(async (event) => {
       include: {
         agent: true,
         listings: true,
-        user: true,
       },
     });
     return {
-      message: "number of [properties: " + propertyData.length,
+      message: "number of [properties: ]" + propertyData.length,
       data: propertyData,
     };
   } catch (error) {

@@ -1,0 +1,10 @@
+model Media {
+  id         Int      @id @default(autoincrement())
+  images     String
+  videoTour  String
+  floorPlans String
+  propertyId Int
+  property   Property @relation(fields: [propertyId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

@@ -1,26 +1,47 @@
 model Listing {
-  id                 String   @id @default(uuid())
-  property           Property @relation(fields: [propertyId], references: [id])
-  propertyId         String
-  listingType        ListingType[]
+  id                 Int                @id @default(autoincrement())
+  title              String
   price              Float
-  availabilityStatus AvailabilityStatus[]
-  agent              Agent    @relation(fields: [agentId], references: [id])
-  agentId            String
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  description        String
-  features           Feature[]
-  user User[]
+  priceType          PriceType
+  location           String
+  listingType        ListingType
+  availabilityStatus AvailabilityStatus
+  listingTier        ListingTier
+  listingCosts       ListingCosts?
+  userId             Int                @unique
+  user               User               @relation(fields: [userId], references: [id])
+  agentId            Int                @unique
+  agent              Agent              @relation(fields: [agentId], references: [id])
+  propertyId         Int                @unique
+  property           Property           @relation(fields: [propertyId], references: [id])
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
 }
 
-enum Feature {
- KITCHEN_FEATURES 
- LIVING_AREA_FEATURES 
- BATHROOM_FEATURES 
- STORAGE_SPACE 
- OUTDOOR_SPACE 
- PARKING 
- SECURITY_FEATURES 
- AMENITIES_NEARBY 
+enum ListingType {
+  FOR_SALE
+  FOR_LONG_TERM_LET
+  SHORT_TERM_LET
+  AUCTION
+}
+
+enum ListingTier {
+  BASIC
+  PREMIUM
+  FEATURED
+}
+
+enum PriceType {
+  OFFERS_IN_EXCESS_OF
+  GUIDE_PRICE
+  OFFERS_IN_THE_REGION_OF
+  PER_CALENDAR_MONTH
+  PER_WEEK
+}
+
+enum AvailabilityStatus {
+  AVAILABLE
+  UNDER_OFFER
+  SOLD
+  LET_AGREED
 }

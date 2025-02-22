@@ -1,0 +1,10 @@
+model LivingAreaFeatures {
+  id          Int      @id @default(autoincrement())
+  fireplace   Boolean
+  balcony     Boolean
+  openConcept Boolean
+  propertyId  Int
+  property    Property @relation(fields: [propertyId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

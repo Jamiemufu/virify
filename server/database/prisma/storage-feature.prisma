@@ -1,0 +1,11 @@
+model StorageFeatures {
+  id             Int      @id @default(autoincrement())
+  closets        Boolean
+  attic          Boolean
+  basement       Boolean
+  walkInWardrobe Boolean
+  propertyId     Int
+  property       Property @relation(fields: [propertyId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

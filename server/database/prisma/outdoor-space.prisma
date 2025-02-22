@@ -1,0 +1,13 @@
+model OutdoorSpace {
+  id             Int      @id @default(autoincrement())
+  land           Float
+  garden         Float
+  terrace        Boolean
+  balcony        Boolean
+  patio          Boolean
+  separateParcel Boolean
+  propertyId     Int
+  property       Property @relation(fields: [propertyId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
