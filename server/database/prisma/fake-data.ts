@@ -1,4 +1,4 @@
-import { ListingType, ListingTier, PriceType, AvailabilityStatus, PropertyType, ConstructionType, RoofConstruction, FurnishingStatus, Tenure, verificationStatus } from '@prisma/client';
+import { BedSizeType, ListingType, ListingTier, PriceType, AvailabilityStatus, PropertyType, ConstructionType, RoofConstruction, FurnishingStatus, Tenure, verificationStatus } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import Decimal from 'decimal.js';
 
@@ -9,7 +9,7 @@ export function fakeAdditionalFeatures() {
     investmentPotential: faker.lorem.words(5),
     petPolicy: faker.lorem.words(5),
     accessibilityFeatures: faker.lorem.words(5),
-    moveInDate: faker.lorem.words(5),
+    moveInDate: faker.date.anytime(),
     updatedAt: faker.date.anytime(),
   };
 }
@@ -19,7 +19,7 @@ export function fakeAdditionalFeaturesComplete() {
     investmentPotential: faker.lorem.words(5),
     petPolicy: faker.lorem.words(5),
     accessibilityFeatures: faker.lorem.words(5),
-    moveInDate: faker.lorem.words(5),
+    moveInDate: faker.date.anytime(),
     propertyId: faker.number.int(),
     createdAt: new Date(),
     updatedAt: faker.date.anytime(),
@@ -98,7 +98,6 @@ export function fakeBathroomFeatures() {
     enSuite: faker.datatype.boolean(),
     bathtub: faker.datatype.boolean(),
     walkInShower: faker.datatype.boolean(),
-    additionalToilets: faker.datatype.boolean(),
     downstairs: faker.datatype.boolean(),
     upstairs: faker.datatype.boolean(),
     updatedAt: faker.date.anytime(),
@@ -107,12 +106,44 @@ export function fakeBathroomFeatures() {
 export function fakeBathroomFeaturesComplete() {
   return {
     id: faker.number.int({ max: 2147483647 }),
+    roomNumber: 1,
     enSuite: faker.datatype.boolean(),
     bathtub: faker.datatype.boolean(),
     walkInShower: faker.datatype.boolean(),
-    additionalToilets: faker.datatype.boolean(),
     downstairs: faker.datatype.boolean(),
     upstairs: faker.datatype.boolean(),
+    propertyId: faker.number.int(),
+    createdAt: new Date(),
+    updatedAt: faker.date.anytime(),
+  };
+}
+export function fakeBedroomFeatures() {
+  return {
+    updatedAt: faker.date.anytime(),
+  };
+}
+export function fakeBedroomFeaturesComplete() {
+  return {
+    id: faker.number.int({ max: 2147483647 }),
+    roomNumber: 2,
+    bedNumber: 1,
+    bedSize: BedSizeType.SINGLE,
+    propertyId: faker.number.int(),
+    createdAt: new Date(),
+    updatedAt: faker.date.anytime(),
+  };
+}
+export function fakeDiningroomFeatures() {
+  return {
+    openConcept: faker.datatype.boolean(),
+    updatedAt: faker.date.anytime(),
+  };
+}
+export function fakeDiningroomFeaturesComplete() {
+  return {
+    id: faker.number.int({ max: 2147483647 }),
+    roomNumber: 2,
+    openConcept: faker.datatype.boolean(),
     propertyId: faker.number.int(),
     createdAt: new Date(),
     updatedAt: faker.date.anytime(),
@@ -196,6 +227,7 @@ export function fakeLivingAreaFeatures() {
 export function fakeLivingAreaFeaturesComplete() {
   return {
     id: faker.number.int({ max: 2147483647 }),
+    roomNumber: 1,
     fireplace: faker.datatype.boolean(),
     balcony: faker.datatype.boolean(),
     openConcept: faker.datatype.boolean(),
@@ -206,8 +238,10 @@ export function fakeLivingAreaFeaturesComplete() {
 }
 export function fakeOutdoorSpace() {
   return {
-    land: faker.number.float(),
-    garden: faker.number.float(),
+    land: faker.datatype.boolean(),
+    landSize: undefined,
+    garden: faker.datatype.boolean(),
+    gardenSize: undefined,
     terrace: faker.datatype.boolean(),
     balcony: faker.datatype.boolean(),
     patio: faker.datatype.boolean(),
@@ -218,8 +252,10 @@ export function fakeOutdoorSpace() {
 export function fakeOutdoorSpaceComplete() {
   return {
     id: faker.number.int({ max: 2147483647 }),
-    land: faker.number.float(),
-    garden: faker.number.float(),
+    land: faker.datatype.boolean(),
+    landSize: undefined,
+    garden: faker.datatype.boolean(),
+    gardenSize: undefined,
     terrace: faker.datatype.boolean(),
     balcony: faker.datatype.boolean(),
     patio: faker.datatype.boolean(),
@@ -274,7 +310,9 @@ export function fakeMediaComplete() {
 export function fakeProperty() {
   return {
     propertyType: faker.helpers.arrayElement([PropertyType.HOUSE, PropertyType.TERRACED, PropertyType.SEMI_DETACHED, PropertyType.END_OF_TERRACE, PropertyType.DETACHED, PropertyType.COTTAGE, PropertyType.BUNGALOW, PropertyType.CONDO, PropertyType.PENTHOUSE, PropertyType.FLAT, PropertyType.LAND] as const),
-    size: faker.number.float(),
+    title: faker.lorem.words(5),
+    description: faker.lorem.words(5),
+    size: undefined,
     yearBuilt: faker.lorem.words(5),
     constructionType: faker.helpers.arrayElement([ConstructionType.STONE, ConstructionType.BRICK, ConstructionType.STANDARD] as const),
     roofConstruction: faker.helpers.arrayElement([RoofConstruction.SLATE_TILE, RoofConstruction.CONCRETE_TILE] as const),
@@ -283,7 +321,6 @@ export function fakeProperty() {
     energyRating: undefined,
     tenure: faker.helpers.arrayElement([Tenure.LEASEHOLD, Tenure.FREEHOLD] as const),
     leaseTerm: undefined,
-    mediaId: undefined,
     updatedAt: faker.date.anytime(),
   };
 }
@@ -291,9 +328,9 @@ export function fakePropertyComplete() {
   return {
     id: faker.number.int({ max: 2147483647 }),
     propertyType: faker.helpers.arrayElement([PropertyType.HOUSE, PropertyType.TERRACED, PropertyType.SEMI_DETACHED, PropertyType.END_OF_TERRACE, PropertyType.DETACHED, PropertyType.COTTAGE, PropertyType.BUNGALOW, PropertyType.CONDO, PropertyType.PENTHOUSE, PropertyType.FLAT, PropertyType.LAND] as const),
-    bedrooms: 3,
-    bathrooms: 1,
-    size: faker.number.float(),
+    title: faker.lorem.words(5),
+    description: faker.lorem.words(5),
+    size: undefined,
     yearBuilt: faker.lorem.words(5),
     constructionType: faker.helpers.arrayElement([ConstructionType.STONE, ConstructionType.BRICK, ConstructionType.STANDARD] as const),
     roofConstruction: faker.helpers.arrayElement([RoofConstruction.SLATE_TILE, RoofConstruction.CONCRETE_TILE] as const),
@@ -302,7 +339,11 @@ export function fakePropertyComplete() {
     energyRating: undefined,
     tenure: faker.helpers.arrayElement([Tenure.LEASEHOLD, Tenure.FREEHOLD] as const),
     leaseTerm: undefined,
-    mediaId: undefined,
+    bedrooms: 3,
+    bathrooms: 1,
+    kitchens: 1,
+    livingRooms: 1,
+    diningRooms: 1,
     agentId: undefined,
     userId: undefined,
     createdAt: new Date(),
@@ -312,8 +353,8 @@ export function fakePropertyComplete() {
 export function fakeRunningCosts() {
   return {
     councilTaxBand: faker.lorem.words(5),
-    serviceCharges: faker.number.float(),
-    groundRent: faker.number.float(),
+    serviceCharges: undefined,
+    groundRent: undefined,
     updatedAt: faker.date.anytime(),
   };
 }
@@ -321,8 +362,8 @@ export function fakeRunningCostsComplete() {
   return {
     id: faker.number.int({ max: 2147483647 }),
     councilTaxBand: faker.lorem.words(5),
-    serviceCharges: faker.number.float(),
-    groundRent: faker.number.float(),
+    serviceCharges: undefined,
+    groundRent: undefined,
     propertyId: faker.number.int(),
     createdAt: new Date(),
     updatedAt: faker.date.anytime(),
