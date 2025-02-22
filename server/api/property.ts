@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
     const propertyData = await prisma.property.findMany({
       include: {
         agent: true,
-        listings: true,
+        listing: true,
       },
     });
     return {
