@@ -1,8 +1,8 @@
 model Property {
   id                 Int                  @id @default(autoincrement())
   propertyType       PropertyType
-  bedrooms           Int
-  bathrooms          Int
+  bedrooms           Int                  @default(3)
+  bathrooms          Int                  @default(1)
   size               Float
   yearBuilt          String
   constructionType   ConstructionType

@@ -274,9 +274,7 @@ export function fakeMediaComplete() {
 export function fakeProperty() {
   return {
     propertyType: faker.helpers.arrayElement([PropertyType.HOUSE, PropertyType.TERRACED, PropertyType.SEMI_DETACHED, PropertyType.END_OF_TERRACE, PropertyType.DETACHED, PropertyType.COTTAGE, PropertyType.BUNGALOW, PropertyType.CONDO, PropertyType.PENTHOUSE, PropertyType.FLAT, PropertyType.LAND] as const),
-    bedrooms: faker.number.int({ min: 1, max: 5 }),
-    bathrooms: faker.number.int({ min: 1, max: 3 }),
-    size: faker.number.float({ min: 500, max: 5000 }),
+    size: faker.number.float(),
     yearBuilt: faker.lorem.words(5),
     constructionType: faker.helpers.arrayElement([ConstructionType.STONE, ConstructionType.BRICK, ConstructionType.STANDARD] as const),
     roofConstruction: faker.helpers.arrayElement([RoofConstruction.SLATE_TILE, RoofConstruction.CONCRETE_TILE] as const),
@@ -293,8 +291,8 @@ export function fakePropertyComplete() {
   return {
     id: faker.number.int({ max: 2147483647 }),
     propertyType: faker.helpers.arrayElement([PropertyType.HOUSE, PropertyType.TERRACED, PropertyType.SEMI_DETACHED, PropertyType.END_OF_TERRACE, PropertyType.DETACHED, PropertyType.COTTAGE, PropertyType.BUNGALOW, PropertyType.CONDO, PropertyType.PENTHOUSE, PropertyType.FLAT, PropertyType.LAND] as const),
-    bedrooms: faker.number.int(),
-    bathrooms: faker.number.int(),
+    bedrooms: 3,
+    bathrooms: 1,
     size: faker.number.float(),
     yearBuilt: faker.lorem.words(5),
     constructionType: faker.helpers.arrayElement([ConstructionType.STONE, ConstructionType.BRICK, ConstructionType.STANDARD] as const),
