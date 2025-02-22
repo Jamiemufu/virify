@@ -12,7 +12,6 @@ model Property {
   energyRating       String?
   tenure             Tenure
   leaseTerm          Int?
-  addressId          Int
   address            Address?
   kitchenFeatures    KitchenFeatures[]
   livingAreaFeatures LivingAreaFeatures[]
@@ -24,13 +23,13 @@ model Property {
   amenities          Amenities[]
   runningCosts       RunningCosts?
   media              Media[]
-  mediaId            Int                  @unique
+  mediaId            Int?
   agent              Agent?               @relation(fields: [agentId], references: [id])
-  agentId            Int?                 @unique
+  agentId            Int?
   User               User?                @relation(fields: [userId], references: [id])
-  userId             Int                  @unique
+  userId             Int?
   additionalFeatures AdditionalFeatures[]
-  listings           Listing?
+  listing            Listing?
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
 }

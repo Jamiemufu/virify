@@ -1,14 +1,13 @@
 model User {
-  id         Int        @id @default(autoincrement())
-  email      String     @unique
-  password   String
-  verified   Boolean    @default(false)
-  address    Address?
-  propertyId Int?       @unique
-  property   Property[]
-  listings   Listing[]
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  password  String
+  verified  Boolean    @default(false)
+  address   Address?
+  property  Property[]
+  listings  Listing[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
 enum verificationStatus {

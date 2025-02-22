@@ -5,9 +5,9 @@ model Address {
   postcode   String
   country    String
   user       User?     @relation(fields: [userId], references: [id])
-  userId     Int       @unique
+  userId     Int?      @unique
   property   Property? @relation(fields: [propertyId], references: [id])
-  propertyId Int       @unique
+  propertyId Int?      @unique
   agent      Agent?    @relation(fields: [agentId], references: [id])
   agentId    Int?      @unique
   createdAt  DateTime  @default(now())
