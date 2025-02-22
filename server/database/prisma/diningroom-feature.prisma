@@ -1,8 +1,6 @@
-model LivingAreaFeatures {
+model DiningroomFeatures {
   id          Int      @id @default(autoincrement())
-  roomNumber  Int      @default(1)
-  fireplace   Boolean
-  balcony     Boolean
+  roomNumber  Int      @default(2)
   openConcept Boolean
   propertyId  Int
   property    Property @relation(fields: [propertyId], references: [id])

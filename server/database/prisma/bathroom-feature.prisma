@@ -1,13 +1,13 @@
 model BathroomFeatures {
-  id                Int      @id @default(autoincrement())
-  enSuite           Boolean
-  bathtub           Boolean
-  walkInShower      Boolean
-  additionalToilets Boolean
-  downstairs        Boolean
-  upstairs          Boolean
-  propertyId        Int
-  property          Property @relation(fields: [propertyId], references: [id])
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  roomNumber   Int      @default(1)
+  enSuite      Boolean
+  bathtub      Boolean
+  walkInShower Boolean
+  downstairs   Boolean
+  upstairs     Boolean
+  propertyId   Int
+  property     Property @relation(fields: [propertyId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

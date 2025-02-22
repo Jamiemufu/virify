@@ -1,9 +1,9 @@
 model Property {
   id                 Int                  @id @default(autoincrement())
   propertyType       PropertyType
-  bedrooms           Int                  @default(3)
-  bathrooms          Int                  @default(1)
-  size               Float
+  title              String
+  description        String
+  size               Float?
   yearBuilt          String
   constructionType   ConstructionType
   roofConstruction   RoofConstruction
@@ -13,17 +13,23 @@ model Property {
   tenure             Tenure
   leaseTerm          Int?
   address            Address?
-  kitchenFeatures    KitchenFeatures[]
+  bedrooms           Int                  @default(3)
+  bathrooms          Int                  @default(1)
+  kitchens           Int                  @default(1)
+  livingRooms        Int                  @default(1)
+  diningRooms        Int                  @default(1)
+  bedroomFeatures    BedroomFeatures[]
+  diningRoomFeatures DiningroomFeatures[]
+  kitchenFeatures    KitchenFeatures?
   livingAreaFeatures LivingAreaFeatures[]
   bathroomFeatures   BathroomFeatures[]
-  storageFeatures    StorageFeatures[]
-  outdoorSpace       OutdoorSpace[]
-  parking            Parking[]
-  securityFeatures   SecurityFeatures[]
+  storageFeatures    StorageFeatures?
+  outdoorSpace       OutdoorSpace?
+  parking            Parking?
+  securityFeatures   SecurityFeatures?
   amenities          Amenities[]
   runningCosts       RunningCosts?
   media              Media[]
-  mediaId            Int?
   agent              Agent?               @relation(fields: [agentId], references: [id])
   agentId            Int?
   User               User?                @relation(fields: [userId], references: [id])

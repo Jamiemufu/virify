@@ -4,7 +4,7 @@ model SecurityFeatures {
   cctv              Boolean
   alarmSystem       Boolean
   neighborhoodWatch Boolean
-  propertyId        Int
+  propertyId        Int      @unique
   property          Property @relation(fields: [propertyId], references: [id])
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
