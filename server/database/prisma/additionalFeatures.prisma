@@ -1,11 +1,25 @@
 model AdditionalFeatures {
-  id                    Int      @id @default(autoincrement())
+  id                    Int                       @id @default(autoincrement())
   investmentPotential   String
   petPolicy             String
-  accessibilityFeatures String
+  accessibilityFeatures accessibilityFeaturesType
   moveInDate            DateTime
-  propertyId            Int      @unique
-  property              Property @relation(fields: [propertyId], references: [id])
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  propertyId            Int                       @unique
+  property              Property                  @relation(fields: [propertyId], references: [id])
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+}
+
+enum accessibilityFeaturesType {
+  WHEELCHAIR_ACCESSIBLE
+  WHEELCHAIR_RAMP
+  ELEVATOR
+  STAIRS
+  PARKING
+  OTHER
+}
+
+enum petPolicyType {
+  ALLOWED
+  NOT_ALLOWED
 }

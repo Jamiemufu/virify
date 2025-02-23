@@ -5,9 +5,6 @@ export default defineEventHandler(async (event) => {
     // find the user by id
     const user = await prisma.user.findUnique({
       where: { id: Number(id) },
-      include: {
-        address: true,
-      }
     });
     return {
       status: 200,

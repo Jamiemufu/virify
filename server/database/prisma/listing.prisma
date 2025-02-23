@@ -4,7 +4,6 @@ model Listing {
   description        String
   price              Float
   priceType          PriceType
-  location           String
   listingType        ListingType
   availabilityStatus AvailabilityStatus
   listingTier        ListingTier

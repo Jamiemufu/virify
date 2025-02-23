@@ -1,23 +1,20 @@
 export default defineEventHandler(async (event) => {
   // get the post data
-  const { email, password } = await readBody(event)
-  const { street, city, postcode, country } = await readBody(event)
-
+  const formData = await readBody(event)
+  // create a new user
   const user = await prisma.user.create({
     data: {
-      email,
-      password,
-      address: {
-        create: {
-          street,
-          city,
-          postcode,
-          country,
-        },
-      },
-    },
-    include: {
-      address: true,
+     firstName: formData.firstName as string,
+     lastName: formData.lastName as string,
+     username: formData.username as string,
+     email: formData.email as string,
+     password: formData.password as string,
+     addressLine1: formData.addressLine1 as string,
+     addressLine2: formData.addressLine2 as string,
+     city: formData.city as string,
+     county: formData.county as string,
+     postcode: formData.postcode as string,
+     country: formData.country as string,
     },
   });
 
