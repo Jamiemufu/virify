@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 
 import {
+  fakeUser,
   fakeProperty,
   fakeListing,
   fakeParking,
@@ -15,12 +16,14 @@ import {
   fakeMedia,
   fakeBedroomFeatures,
   fakeDiningroomFeatures,
+  fakeAddress,
 } from "../database/prisma/fake-data";
 
 // a basic seeder that will seen user/property/listing data
 export default defineEventHandler(async (event) => {
+  const userType = fakeUser();
   const PropertyType = fakeProperty();
-  // const listingsType = fakeListing();
+  const addressType = fakeAddress();
   const parkingType = fakeParking();
   const secrutiyFeaturesType = fakeSecurityFeatures();
   const kitchenFeaturesType = fakeKitchenFeatures();
@@ -38,17 +41,7 @@ export default defineEventHandler(async (event) => {
     // Create user with address
     const buildUser = await prisma.user.create({
       data: {
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-        createdAt: new Date(),
-        address: {
-          create: {
-            street: faker.location.streetAddress(),
-            city: faker.location.city(),
-            postcode: faker.location.zipCode(),
-            country: faker.location.country(),
-          },
-        },
+       ...userType,
         property: {
           create: {
             ...PropertyType,
@@ -59,10 +52,7 @@ export default defineEventHandler(async (event) => {
             },
             address: {
               create: {
-                street: faker.location.streetAddress(),
-                city: faker.location.city(),
-                postcode: faker.location.zipCode(),
-                country: faker.location.country(),
+                ...addressType
               },
             },
             bedroomFeatures: {
@@ -121,7 +111,6 @@ export default defineEventHandler(async (event) => {
     const user = await prisma.user.findUnique({
       where: { id: buildUser.id },
       include: {
-        address: true,
         property: {
           include: {
             media: true,

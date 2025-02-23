@@ -1,27 +1,43 @@
 <script setup lang="ts">
+
 interface Form {
+  firstName: string;
+  lastName: string;
+  username: string;
   email: string;
   password: string;
-  street: string;
+  addressLine1: string;
+  addressLine2?: string;
   city: string;
+  county: string;
   postcode: string;
   country: string;
 }
 
 const form = ref<Form>({
+  firstName: "",
+  lastName: "",
+  username: "",
   email: "",
   password: "",
-  street: "",
+  addressLine1: "",
+  addressLine2: "",
   city: "",
+  county: "",
   postcode: "",
   country: "",
 });
 
 const errors = ref<Record<keyof Form, string | null>>({
+  firstName: null,
+  lastName: null,
+  username: null,
   email: null,
   password: null,
-  street: null,
+  addressLine1: null,
+  addressLine2: null,
   city: null,
+  county: null,
   postcode: null,
   country: null,
 });
@@ -43,18 +59,28 @@ function validateForm() {
 
 function resetForm() {
   form.value = {
+    firstName: "",
+    lastName: "",
+    username: "",
     email: "",
     password: "",
-    street: "",
+    addressLine1: "",
+    addressLine2: "",
     city: "",
+    county: "",
     postcode: "",
     country: "",
   };
   errors.value = {
+    firstName: null,
+    lastName: null,
+    username: null,
     email: null,
     password: null,
-    street: null,
+    addressLine1: null,
+    addressLine2: null,
     city: null,
+    county: null,
     postcode: null,
     country: null,
   };
@@ -83,34 +109,59 @@ async function handleForm() {
       <h1 class="text-2xl font-bold mb-4">Test User Creation Form</h1>
       <form @submit.prevent="handleForm">
         <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="firstName"> First Name </label>
+          <input v-model="form.firstName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstName" type="text" placeholder="First Name" />
+          <span v-if="errors.firstName" class="text-red-500 text-xs italic">{{ errors.firstName }}</span>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="lastName"> Last Name </label>
+          <input v-model="form.lastName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastName" type="text" placeholder="Last Name" />
+          <span v-if="errors.lastName" class="text-red-500 text-xs italic">{{ errors.lastName }}</span>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="username"> Username </label>
+          <input v-model="form.username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
+          <span v-if="errors.username" class="text-red-500 text-xs italic">{{ errors.username }}</span>
+        </div>
+        <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="email"> Email </label>
           <input v-model="form.email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email" />
-          <p v-if="errors.email" class="text-red-500 text-xs italic">{{ errors.email }}</p>
+          <span v-if="errors.email" class="text-red-500 text-xs italic">{{ errors.email }}</span>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="password"> Password </label>
           <input v-model="form.password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password" />
-          <p v-if="errors.password" class="text-red-500 text-xs italic">{{ errors.password }}</p>
+          <span v-if="errors.password" class="text-red-500 text-xs italic">{{ errors.password }}</span>
         </div>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="street"> Street </label>
-          <input v-model="form.street" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="street" type="text" placeholder="Street" />
-          <p v-if="errors.street" class="text-red-500 text-xs italic">{{ errors.street }}</p>
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="addressLine1"> Address Line 1 </label>
+          <input v-model="form.addressLine1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="addressLine1" type="text" placeholder="Address Line 1" />
+          <span v-if="errors.addressLine1" class="text-red-500 text-xs italic">{{ errors.addressLine1 }}</span>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="addressLine2"> Address Line 2 </label>
+          <input v-model="form.addressLine2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="addressLine2" type="text" placeholder="Address Line 2" />
+          <span v-if="errors.addressLine2" class="text-red-500 text-xs italic">{{ errors.addressLine2 }}</span>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="city"> City </label>
           <input v-model="form.city" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="city" type="text" placeholder="City" />
-          <p v-if="errors.city" class="text-red-500 text-xs italic">{{ errors.city }}</p>
+          <span v-if="errors.city" class="text-red-500 text-xs italic">{{ errors.city }}</span>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="county"> County </label>
+          <input v-model="form.county" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="county" type="text" placeholder="County" />
+          <span v-if="errors.county" class="text-red-500 text-xs italic">{{ errors.county }}</span>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="postcode"> Postcode </label>
           <input v-model="form.postcode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="postcode" type="text" placeholder="Postcode" />
-          <p v-if="errors.postcode" class="text-red-500 text-xs italic">{{ errors.postcode }}</p>
+          <span v-if="errors.postcode" class="text-red-500 text-xs italic">{{ errors.postcode }}</span>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="country"> Country </label>
           <input v-model="form.country" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="country" type="text" placeholder="Country" />
-          <p v-if="errors.country" class="text-red-500 text-xs italic">{{ errors.country }}</p>
+          <span v-if="errors.country" class="text-red-500 text-xs italic">{{ errors.country }}</span>
         </div>
         <div class="flex items-center justify-between">
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Create User</button>

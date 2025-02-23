@@ -4,8 +4,14 @@ model Agent {
   contactInfo          String
   directContactOptions String
   viewingAvailability  String
+  addressLine1         String
+  addressLine2         String
+  city                 String
+  county               String
+  postcode             String
+  country              String
+  users                User[]
   addressId            Int
-  address              Address?
   property             Property[]
   Listing              Listing[]
   createdAt            DateTime   @default(now())

@@ -1,6 +1,5 @@
 model ListingCosts {
   id           Int      @id @default(autoincrement())
-  price        Float
   deposit      Float
   upfrontCosts Float
   description  String
