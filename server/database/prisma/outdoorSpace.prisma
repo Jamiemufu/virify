@@ -8,6 +8,7 @@ model OutdoorSpace {
   balcony        Boolean
   patio          Boolean
   separateParcel Boolean
+  description    String
   propertyId     Int      @unique
   property       Property @relation(fields: [propertyId], references: [id])
   createdAt      DateTime @default(now())

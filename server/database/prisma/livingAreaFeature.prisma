@@ -4,6 +4,7 @@ model LivingAreaFeatures {
   fireplace   Boolean
   balcony     Boolean
   openConcept Boolean
+  description String
   propertyId  Int
   property    Property @relation(fields: [propertyId], references: [id])
   createdAt   DateTime @default(now())

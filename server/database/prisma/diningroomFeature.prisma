@@ -2,6 +2,7 @@ model DiningroomFeatures {
   id          Int      @id @default(autoincrement())
   roomNumber  Int      @default(2)
   openConcept Boolean
+  description String
   propertyId  Int
   property    Property @relation(fields: [propertyId], references: [id])
   createdAt   DateTime @default(now())

@@ -4,6 +4,8 @@ model Address {
   city       String
   postcode   String
   country    String
+  latitude   Float?
+  longitude  Float?
   user       User?     @relation(fields: [userId], references: [id])
   userId     Int?      @unique
   property   Property? @relation(fields: [propertyId], references: [id])
@@ -13,3 +15,5 @@ model Address {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 }
+
+// 51.60771437792292, -3.3956460229947183

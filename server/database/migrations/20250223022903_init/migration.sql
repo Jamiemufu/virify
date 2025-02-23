@@ -1,4 +1,7 @@
 -- CreateEnum
+CREATE TYPE "BedSizeType" AS ENUM ('SINGLE', 'DOUBLE', 'QUEEN', 'KING', 'SUPER_KING');
+
+-- CreateEnum
 CREATE TYPE "ListingType" AS ENUM ('FOR_SALE', 'FOR_LONG_TERM_LET', 'SHORT_TERM_LET', 'AUCTION');
 
 -- CreateEnum
@@ -26,7 +29,7 @@ CREATE TYPE "FurnishingStatus" AS ENUM ('FURNISHED', 'UNFURNISHED', 'PART_FURNIS
 CREATE TYPE "Tenure" AS ENUM ('LEASEHOLD', 'FREEHOLD');
 
 -- CreateEnum
-CREATE TYPE "verificationStatus" AS ENUM ('PENDING', 'VERIFIED', 'NILL');
+CREATE TYPE "verificationStatus" AS ENUM ('PENDING', 'VERIFIED', 'NO');
 
 -- CreateTable
 CREATE TABLE "AdditionalFeatures" (
@@ -34,7 +37,7 @@ CREATE TABLE "AdditionalFeatures" (
     "investmentPotential" TEXT NOT NULL,
     "petPolicy" TEXT NOT NULL,
     "accessibilityFeatures" TEXT NOT NULL,
-    "moveInDate" TEXT NOT NULL,
+    "moveInDate" TIMESTAMP(3) NOT NULL,
     "propertyId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -50,7 +53,7 @@ CREATE TABLE "Address" (
     "postcode" TEXT NOT NULL,
     "country" TEXT NOT NULL,
     "userId" INTEGER,
-    "propertyId" INTEGER NOT NULL,
+    "propertyId" INTEGER,
     "agentId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -66,7 +69,6 @@ CREATE TABLE "Agent" (
     "directContactOptions" TEXT NOT NULL,
     "viewingAvailability" TEXT NOT NULL,
     "addressId" INTEGER NOT NULL,
-    "propertyId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -74,7 +76,7 @@ CREATE TABLE "Agent" (
 );
 
 -- CreateTable
-CREATE TABLE "Amenities" (
+CREATE TABLE "AmenitiesFeature" (
     "id" SERIAL NOT NULL,
     "transportLinks" TEXT NOT NULL,
     "schools" TEXT NOT NULL,
@@ -82,22 +84,51 @@ CREATE TABLE "Amenities" (
     "shopping" TEXT NOT NULL,
     "greenSpaces" TEXT NOT NULL,
     "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Amenities_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "AmenitiesFeature_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "BathroomFeatures" (
     "id" SERIAL NOT NULL,
+    "roomNumber" INTEGER NOT NULL DEFAULT 1,
     "enSuite" BOOLEAN NOT NULL,
     "bathtub" BOOLEAN NOT NULL,
     "walkInShower" BOOLEAN NOT NULL,
-    "additionalToilets" BOOLEAN NOT NULL,
     "downstairs" BOOLEAN NOT NULL,
     "upstairs" BOOLEAN NOT NULL,
     "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "BathroomFeatures_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "BedroomFeatures" (
+    "id" SERIAL NOT NULL,
+    "roomNumber" INTEGER NOT NULL DEFAULT 2,
+    "bedNumber" INTEGER NOT NULL DEFAULT 1,
+    "bedSize" "BedSizeType" NOT NULL DEFAULT 'SINGLE',
+    "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "BedroomFeatures_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "DiningroomFeatures" (
+    "id" SERIAL NOT NULL,
+    "roomNumber" INTEGER NOT NULL DEFAULT 2,
+    "openConcept" BOOLEAN NOT NULL,
+    "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "DiningroomFeatures_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -107,8 +138,29 @@ CREATE TABLE "KitchenFeatures" (
     "openPlan" BOOLEAN NOT NULL,
     "appliancesIncluded" BOOLEAN NOT NULL,
     "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "KitchenFeatures_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Listing" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
+    "priceType" "PriceType" NOT NULL,
+    "location" TEXT NOT NULL,
+    "listingType" "ListingType" NOT NULL,
+    "availabilityStatus" "AvailabilityStatus" NOT NULL,
+    "listingTier" "ListingTier" NOT NULL,
+    "userId" INTEGER,
+    "agentId" INTEGER,
+    "propertyId" INTEGER,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Listing_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -125,44 +177,46 @@ CREATE TABLE "ListingCosts" (
 );
 
 -- CreateTable
-CREATE TABLE "Listing" (
-    "id" SERIAL NOT NULL,
-    "title" TEXT NOT NULL,
-    "price" DOUBLE PRECISION NOT NULL,
-    "priceType" "PriceType" NOT NULL,
-    "location" TEXT NOT NULL,
-    "listingType" "ListingType" NOT NULL,
-    "availabilityStatus" "AvailabilityStatus" NOT NULL,
-    "listingTier" "ListingTier" NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "propertyId" INTEGER NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Listing_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "LivingAreaFeatures" (
     "id" SERIAL NOT NULL,
+    "roomNumber" INTEGER NOT NULL DEFAULT 1,
     "fireplace" BOOLEAN NOT NULL,
     "balcony" BOOLEAN NOT NULL,
     "openConcept" BOOLEAN NOT NULL,
     "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "LivingAreaFeatures_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
+CREATE TABLE "Media" (
+    "id" SERIAL NOT NULL,
+    "images" TEXT NOT NULL,
+    "videoTour" TEXT NOT NULL,
+    "floorPlans" TEXT NOT NULL,
+    "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Media_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "OutdoorSpace" (
     "id" SERIAL NOT NULL,
-    "land" DOUBLE PRECISION NOT NULL,
-    "garden" DOUBLE PRECISION NOT NULL,
+    "land" BOOLEAN NOT NULL,
+    "landSize" DOUBLE PRECISION,
+    "garden" BOOLEAN NOT NULL,
+    "gardenSize" DOUBLE PRECISION,
     "terrace" BOOLEAN NOT NULL,
     "balcony" BOOLEAN NOT NULL,
     "patio" BOOLEAN NOT NULL,
     "separateParcel" BOOLEAN NOT NULL,
     "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "OutdoorSpace_pkey" PRIMARY KEY ("id")
 );
@@ -176,27 +230,19 @@ CREATE TABLE "Parking" (
     "onStreet" BOOLEAN NOT NULL,
     "noParking" BOOLEAN NOT NULL,
     "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Parking_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Media" (
-    "id" SERIAL NOT NULL,
-    "images" TEXT NOT NULL,
-    "videoTour" TEXT NOT NULL,
-    "floorPlans" TEXT NOT NULL,
-
-    CONSTRAINT "Media_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Property" (
     "id" SERIAL NOT NULL,
     "propertyType" "PropertyType" NOT NULL,
-    "bedrooms" INTEGER NOT NULL,
-    "bathrooms" INTEGER NOT NULL,
-    "size" DOUBLE PRECISION NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "size" DOUBLE PRECISION,
     "yearBuilt" TEXT NOT NULL,
     "constructionType" "ConstructionType" NOT NULL,
     "roofConstruction" "RoofConstruction" NOT NULL,
@@ -205,8 +251,13 @@ CREATE TABLE "Property" (
     "energyRating" TEXT,
     "tenure" "Tenure" NOT NULL,
     "leaseTerm" INTEGER,
-    "addressId" INTEGER NOT NULL,
-    "mediaId" INTEGER NOT NULL,
+    "bedrooms" INTEGER NOT NULL DEFAULT 3,
+    "bathrooms" INTEGER NOT NULL DEFAULT 1,
+    "kitchens" INTEGER NOT NULL DEFAULT 1,
+    "livingRooms" INTEGER NOT NULL DEFAULT 1,
+    "diningRooms" INTEGER NOT NULL DEFAULT 1,
+    "agentId" INTEGER,
+    "userId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -217,9 +268,11 @@ CREATE TABLE "Property" (
 CREATE TABLE "RunningCosts" (
     "id" SERIAL NOT NULL,
     "councilTaxBand" TEXT NOT NULL,
-    "serviceCharges" DOUBLE PRECISION NOT NULL,
-    "groundRent" DOUBLE PRECISION NOT NULL,
+    "serviceCharges" DOUBLE PRECISION,
+    "groundRent" DOUBLE PRECISION,
     "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "RunningCosts_pkey" PRIMARY KEY ("id")
 );
@@ -232,6 +285,8 @@ CREATE TABLE "SecurityFeatures" (
     "alarmSystem" BOOLEAN NOT NULL,
     "neighborhoodWatch" BOOLEAN NOT NULL,
     "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "SecurityFeatures_pkey" PRIMARY KEY ("id")
 );
@@ -244,6 +299,8 @@ CREATE TABLE "StorageFeatures" (
     "basement" BOOLEAN NOT NULL,
     "walkInWardrobe" BOOLEAN NOT NULL,
     "propertyId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "StorageFeatures_pkey" PRIMARY KEY ("id")
 );
@@ -253,10 +310,15 @@ CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "verified" BOOLEAN NOT NULL DEFAULT false,
+    "verified" "verificationStatus" NOT NULL DEFAULT 'NO',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "AdditionalFeatures_propertyId_key" ON "AdditionalFeatures"("propertyId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Address_userId_key" ON "Address"("userId");
@@ -268,13 +330,28 @@ CREATE UNIQUE INDEX "Address_propertyId_key" ON "Address"("propertyId");
 CREATE UNIQUE INDEX "Address_agentId_key" ON "Address"("agentId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Agent_propertyId_key" ON "Agent"("propertyId");
+CREATE UNIQUE INDEX "KitchenFeatures_propertyId_key" ON "KitchenFeatures"("propertyId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Listing_propertyId_key" ON "Listing"("propertyId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ListingCosts_listingId_key" ON "ListingCosts"("listingId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "OutdoorSpace_propertyId_key" ON "OutdoorSpace"("propertyId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Parking_propertyId_key" ON "Parking"("propertyId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "RunningCosts_propertyId_key" ON "RunningCosts"("propertyId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "SecurityFeatures_propertyId_key" ON "SecurityFeatures"("propertyId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "StorageFeatures_propertyId_key" ON "StorageFeatures"("propertyId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
@@ -286,34 +363,43 @@ ALTER TABLE "AdditionalFeatures" ADD CONSTRAINT "AdditionalFeatures_propertyId_f
 ALTER TABLE "Address" ADD CONSTRAINT "Address_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Address" ADD CONSTRAINT "Address_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Address" ADD CONSTRAINT "Address_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Address" ADD CONSTRAINT "Address_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Agent" ADD CONSTRAINT "Agent_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Amenities" ADD CONSTRAINT "Amenities_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "AmenitiesFeature" ADD CONSTRAINT "AmenitiesFeature_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "BathroomFeatures" ADD CONSTRAINT "BathroomFeatures_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "BedroomFeatures" ADD CONSTRAINT "BedroomFeatures_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "DiningroomFeatures" ADD CONSTRAINT "DiningroomFeatures_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "KitchenFeatures" ADD CONSTRAINT "KitchenFeatures_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Listing" ADD CONSTRAINT "Listing_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Listing" ADD CONSTRAINT "Listing_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Listing" ADD CONSTRAINT "Listing_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ListingCosts" ADD CONSTRAINT "ListingCosts_listingId_fkey" FOREIGN KEY ("listingId") REFERENCES "Listing"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Listing" ADD CONSTRAINT "Listing_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Listing" ADD CONSTRAINT "Listing_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "LivingAreaFeatures" ADD CONSTRAINT "LivingAreaFeatures_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Media" ADD CONSTRAINT "Media_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "OutdoorSpace" ADD CONSTRAINT "OutdoorSpace_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -322,7 +408,10 @@ ALTER TABLE "OutdoorSpace" ADD CONSTRAINT "OutdoorSpace_propertyId_fkey" FOREIGN
 ALTER TABLE "Parking" ADD CONSTRAINT "Parking_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Property" ADD CONSTRAINT "Property_mediaId_fkey" FOREIGN KEY ("mediaId") REFERENCES "Media"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Property" ADD CONSTRAINT "Property_agentId_fkey" FOREIGN KEY ("agentId") REFERENCES "Agent"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Property" ADD CONSTRAINT "Property_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "RunningCosts" ADD CONSTRAINT "RunningCosts_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

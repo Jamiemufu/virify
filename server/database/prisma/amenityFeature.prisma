@@ -1,10 +1,11 @@
-model Amenities {
+model AmenitiesFeature {
   id             Int      @id @default(autoincrement())
   transportLinks String
   schools        String
   hospitals      String
   shopping       String
   greenSpaces    String
+  description    String
   propertyId     Int
   property       Property @relation(fields: [propertyId], references: [id])
   createdAt      DateTime @default(now())

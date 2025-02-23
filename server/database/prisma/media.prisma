@@ -4,6 +4,7 @@ model Media {
   images     String
   videoTour  String
   floorPlans String
+  metadata   String
   propertyId Int
   property   Property @relation(fields: [propertyId], references: [id])
   createdAt  DateTime @default(now())

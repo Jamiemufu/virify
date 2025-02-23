@@ -19,7 +19,7 @@ model Property {
   livingRooms        Int                  @default(1)
   diningRooms        Int                  @default(1)
   bedroomFeatures    BedroomFeatures[]
-  diningRoomFeatures DiningroomFeatures[]
+  diningroomFeatures DiningroomFeatures[]
   kitchenFeatures    KitchenFeatures?
   livingAreaFeatures LivingAreaFeatures[]
   bathroomFeatures   BathroomFeatures[]
@@ -27,7 +27,7 @@ model Property {
   outdoorSpace       OutdoorSpace?
   parking            Parking?
   securityFeatures   SecurityFeatures?
-  amenities          Amenities[]
+  amenities          AmenitiesFeature[]
   runningCosts       RunningCosts?
   media              Media[]
   agent              Agent?               @relation(fields: [agentId], references: [id])

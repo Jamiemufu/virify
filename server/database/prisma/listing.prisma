@@ -1,6 +1,7 @@
 model Listing {
   id                 Int                @id @default(autoincrement())
   title              String
+  description        String
   price              Float
   priceType          PriceType
   location           String

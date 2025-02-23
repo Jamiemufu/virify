@@ -6,6 +6,7 @@ model BathroomFeatures {
   walkInShower Boolean
   downstairs   Boolean
   upstairs     Boolean
+  description  String
   propertyId   Int
   property     Property @relation(fields: [propertyId], references: [id])
   createdAt    DateTime @default(now())

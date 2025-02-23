@@ -10,13 +10,14 @@ import {
   fakeBathroomFeatures,
   fakeStorageFeatures,
   fakeOutdoorSpace,
-  fakeAmenities,
+  fakeAmenitiesFeature,
   fakeRunningCosts,
   fakeMedia,
   fakeBedroomFeatures,
   fakeDiningroomFeatures,
 } from "../database/prisma/fake-data";
 
+// a basic seeder that will seen user/property/listing data
 export default defineEventHandler(async (event) => {
   const PropertyType = fakeProperty();
   // const listingsType = fakeListing();
@@ -27,7 +28,7 @@ export default defineEventHandler(async (event) => {
   const bathroomFeaturesType = fakeBathroomFeatures();
   const storageFeaturesType = fakeStorageFeatures();
   const outdoorSpaceFeaturesType = fakeOutdoorSpace();
-  const amenitiesType = fakeAmenities();
+  const amenitiesType = fakeAmenitiesFeature();
   const runningCostsType = fakeRunningCosts();
   const mediaType = fakeMedia();
   const bedroomFeaturesType = fakeBedroomFeatures();
@@ -39,7 +40,6 @@ export default defineEventHandler(async (event) => {
       data: {
         email: faker.internet.email(),
         password: faker.internet.password(),
-        verified: false,
         createdAt: new Date(),
         address: {
           create: {
@@ -74,7 +74,7 @@ export default defineEventHandler(async (event) => {
             bathroomFeatures: {
               create: [{ ...bathroomFeaturesType }, { ...bathroomFeaturesType }],
             },
-            diningRoomFeatures: {
+            diningroomFeatures: {
               create: [{ ...diningroomType }, { ...diningroomType }],
             },
             kitchenFeatures: {
@@ -130,7 +130,7 @@ export default defineEventHandler(async (event) => {
             bathroomFeatures: true,
             kitchenFeatures: true,
             bedroomFeatures: true,
-            diningRoomFeatures: true,
+            diningroomFeatures: true,
             outdoorSpace: true,
             storageFeatures: true,
             securityFeatures: true,

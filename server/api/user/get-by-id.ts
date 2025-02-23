@@ -1,8 +1,10 @@
 export default defineEventHandler(async (event) => {
-  const { id } = await readBody(event);
+  // get the id from the request
+  const { id  } = getQuery(event);
   try {
-    const user = prisma.user.findUnique({
-      where: { id: id },
+    // find the user by id
+    const user = await prisma.user.findUnique({
+      where: { id: Number(id) },
       include: {
         address: true,
       }

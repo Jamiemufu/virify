@@ -3,6 +3,7 @@ model KitchenFeatures {
   modern             Boolean
   openPlan           Boolean
   appliancesIncluded Boolean
+  description        String
   propertyId         Int      @unique
   property           Property @relation(fields: [propertyId], references: [id])
   createdAt          DateTime @default(now())
