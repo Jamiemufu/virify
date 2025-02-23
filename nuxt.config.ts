@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@prisma/nuxt'],
+  modules: ['@nuxtjs/tailwindcss'],
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   nitro: {
@@ -12,11 +12,4 @@ export default defineNuxtConfig({
       dirs: ['server/database/lib/*.ts'],
     },
   },
-  prisma: {
-    prismaRoot: './server/database',
-    // prismaSchemaPath: './server/database/prisma/schema.prisma',
-    skipPrompts: true,
-    generateClient: true,
-    installStudio: false,
-  }
 })

@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "prisma generate && nuxt build && prisma generate",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -27,6 +27,7 @@
   "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
   "devDependencies": {
     "@faker-js/faker": "^9.5.0",
+    "@nuxtjs/tailwindcss": "^6.13.1",
     "@types/pg": "^8.11.11",
     "prisma": "^6.4.1",
     "prisma-generator-fake-data": "^0.14.3",
