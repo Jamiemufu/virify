@@ -1,5 +1,16 @@
 <script setup lang="ts">
 
+const route = useRoute();
+
+onMounted(() => {
+  if (route.query.error) {
+    notification.value = "Not authorized to access that page!";
+    setTimeout(() => {
+      notification.value = null;
+    }, 3000);
+  }
+});
+
 interface Form {
   firstName: string;
   lastName: string;
@@ -85,7 +96,6 @@ function resetForm() {
     country: null,
   };
 }
-
 async function handleForm() {
   if (validateForm()) {
     const res: Response = await $fetch("/api/user/create", {
@@ -107,7 +117,7 @@ async function handleForm() {
   <div class="flex justify-center items-center h-screen">
     <div class="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4 w-1/4">
       <h1 class="text-2xl font-bold mb-4">Test User Creation Form</h1>
-      <form @submit.prevent="handleForm">
+      <form @submit.prevent>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="firstName"> First Name </label>
           <input v-model="form.firstName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstName" type="text" placeholder="First Name" />
@@ -164,11 +174,14 @@ async function handleForm() {
           <span v-if="errors.country" class="text-red-500 text-xs italic">{{ errors.country }}</span>
         </div>
         <div class="flex items-center justify-between">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Create User</button>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" @click="handleForm">Create User</button>
         </div>
       </form>
+      <a href="/auth/google" class="py-3 block">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login with Google</button>
+      </a>
     </div>
-    <div v-if="notification" class="fixed bottom-0 right-0 m-4 p-4 bg-green-500 text-white rounded">
+    <div v-if="notification" class="fixed bottom-0 right-0 m-4 p-4 bg-green-500 text-white rounded" :class="{ 'bg-red-500': notification.includes('Not authorized') }">
       {{ notification }}
     </div>
   </div>

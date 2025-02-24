@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-auth-utils',],
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   nitro: {
@@ -12,4 +12,13 @@ export default defineNuxtConfig({
       dirs: ['server/database/lib/*.ts'],
     },
   },
+  runtimeConfig: {
+    oauth: {
+      // provider in lowercase (github, google, etc.)
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      }
+    }
+  }
 })
