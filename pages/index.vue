@@ -177,7 +177,7 @@ async function handleForm() {
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" @click="handleForm">Create User</button>
         </div>
       </form>
-      <a href="/auth/google" class="py-3 block">
+      <a href="CHNAGEME" class="py-3 block">
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login with Google</button>
       </a>
     </div>
